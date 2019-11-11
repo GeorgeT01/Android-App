@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         loadList();
-        // Swipe to delete
+        // Swipe to delete left and right
         ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
             @Override
             public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
