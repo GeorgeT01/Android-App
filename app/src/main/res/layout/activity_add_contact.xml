@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".AddContactActivity"
+    android:background="@color/colorDark">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgView"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:src="@drawable/contact_default"
+                app:civ_border_width="0.5dp"
+                android:layout_gravity="center"
+                app:civ_border_color="@color/colorWhite"
+                />
+            <EditText
+                android:id="@+id/nameEditText"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="@drawable/edittext_round"
+                android:drawableLeft="@drawable/ic_person_white"
+                android:drawableStart="@drawable/ic_person_white"
+                android:hint="Name"
+                android:textColor="@color/colorWhite"
+                android:fontFamily="@font/montserrat"
+                android:layout_margin="10dp"
+                android:inputType="textCapWords"/>
+
+            <EditText
+                android:id="@+id/emailEditText"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edittext_round"
+                android:drawableLeft="@drawable/ic_email_white"
+                android:drawableStart="@drawable/ic_email_white"
+                android:hint="Email Address"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorWhite"
+                android:inputType="textEmailAddress"/>
+
+            <EditText
+                android:id="@+id/phoneEditText"
+                android:layout_width="match_parent"
+                android:layout_height="46dp"
+                android:paddingLeft="10dp"
+                android:background="@drawable/edittext_round"
+                android:drawableLeft="@drawable/ic_local_phone_white"
+                android:drawableStart="@drawable/ic_local_phone_white"
+                android:hint="Phone Number"
+                android:fontFamily="@font/montserrat"
+                android:layout_margin="10dp"
+                android:textColor="@color/colorWhite"
+                android:inputType="phone"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Birth Date:"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/montserrat"
+                android:textColor="@color/colorWhite"
+                android:layout_marginStart="10dp" />
+            <Button
+                android:id="@+id/datePicker"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:fontFamily="@font/montserrat"
+                android:background="@color/colorBlue"
+                android:textColor="@color/colorWhite"
+                android:text="00.00.0000" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Gender:"
+                android:textColor="@color/colorWhite"
+                android:layout_marginLeft="10dp"
+                android:fontFamily="@font/montserrat"
+                android:layout_marginStart="10dp" />
+            <RadioGroup
+                android:id="@+id/genderRadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_margin="10dp">
+                <RadioButton android:id="@+id/maleRadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:fontFamily="@font/montserrat"
+                    android:textColor="@color/colorWhite"
+                    android:text="Male" />
+                <RadioButton android:id="@+id/femaleRadioBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat"
+                    android:textColor="@color/colorWhite"
+                    android:text="Female" />
+            </RadioGroup>
+            <EditText
+                android:id="@+id/desEditTxt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:lines="8"
+                android:maxLines="10"
+                android:textColor="@color/colorWhite"
+                android:scrollbars="vertical"
+                android:gravity="start"
+                android:paddingLeft="20sp"
+                android:paddingStart="20sp"
+                android:paddingTop="20sp"
+                android:inputType="textMultiLine|textCapSentences"
+                android:background="@drawable/edittext_round"
+                android:hint="Description"
+                android:fontFamily="@font/montserrat"
+                android:minLines="6"
+                android:maxLength="140" />
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"/>
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>

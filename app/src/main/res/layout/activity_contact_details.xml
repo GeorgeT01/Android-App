@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorDark"
+    tools:context=".ContactDetailsActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/app_bar_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:fitsSystemWindows="true"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:id="@+id/collapsing"
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:fitsSystemWindows="true"
+            app:layout_scrollFlags="scroll|exitUntilCollapsed"
+            app:contentScrim="#0E0D0E"
+            app:expandedTitleTextAppearance="@android:color/transparent">
+
+            <ImageView
+                android:id="@+id/imgViewDetails"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:contentDescription="@null"
+                android:src="@drawable/contact_default"
+                android:scaleType="centerCrop"
+                app:layout_collapseMode="parallax"/>
+
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clipToPadding="false"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        tools:ignore="MissingConstraints">
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="3">
+            <ImageButton
+                android:id="@+id/callBtn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:background="@drawable/action_btn"
+                android:src="@drawable/ic_local_phone_white"
+                android:padding="10dp"
+                android:layout_weight="1"/>
+
+            <ImageButton
+                android:id="@+id/mailBtn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:background="@drawable/action_btn"
+                android:src="@drawable/ic_email_white"
+                android:layout_weight="1"/>
+            <ImageButton
+                android:id="@+id/shareBtn"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:background="@drawable/action_btn"
+                android:src="@drawable/ic_share_white"
+                android:layout_weight="1"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp"
+            android:orientation="vertical">
+
+
+            <Button
+                android:id="@+id/nameDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name"
+                android:foreground="?attr/selectableItemBackground"
+                android:drawableStart="@drawable/ic_person_white"
+                android:drawableLeft="@drawable/ic_person_white"
+                android:background="@android:color/transparent"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textAlignment="textStart"
+                android:gravity="start|center"
+                android:fontFamily="@font/montserrat"
+                android:layout_marginTop="10dp"
+                tools:ignore="UnusedAttribute" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorPrimary"/>
+            <Button
+                android:id="@+id/emailDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="EmailAddress"
+                android:drawableStart="@drawable/ic_email_white"
+                android:drawableLeft="@drawable/ic_email_white"
+                android:background="@android:color/transparent"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:fontFamily="@font/montserrat"
+                android:textAlignment="textStart"
+                android:gravity="start|center"
+                android:layout_marginTop="10dp"
+                android:foreground="?attr/selectableItemBackground"
+                tools:ignore="UnusedAttribute" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorPrimary"/>
+            <Button
+                android:id="@+id/phoneDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="EmailAddress"
+                android:drawableStart="@drawable/ic_local_phone_white"
+                android:drawableLeft="@drawable/ic_local_phone_white"
+                android:background="@android:color/transparent"
+                android:fontFamily="@font/montserrat"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textAlignment="textStart"
+                android:gravity="start|center"
+                android:layout_marginTop="10dp"
+                android:foreground="?attr/selectableItemBackground"
+                tools:ignore="UnusedAttribute"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorPrimary"/>
+            <Button
+                android:id="@+id/dateDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="EmailAddress"
+                android:drawableStart="@drawable/ic_date"
+                android:drawableLeft="@drawable/ic_date"
+                android:textColor="@color/colorWhite"
+                android:background="@android:color/transparent"
+                android:textAllCaps="false"
+                android:textAlignment="textStart"
+                android:fontFamily="@font/montserrat"
+                android:gravity="start|center"
+                android:layout_marginTop="10dp"
+                android:foreground="?attr/selectableItemBackground"
+                tools:ignore="UnusedAttribute"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorPrimary"/>
+
+            <Button
+                android:id="@+id/genderDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="EmailAddress"
+                android:drawableStart="@drawable/ic_gender"
+                android:textColor="@color/colorWhite"
+                android:drawableLeft="@drawable/ic_gender"
+                android:background="@android:color/transparent"
+                android:textAllCaps="false"
+                android:textAlignment="textStart"
+                android:fontFamily="@font/montserrat"
+                android:gravity="start|center"
+                android:layout_marginTop="10dp"
+                android:foreground="?attr/selectableItemBackground"
+                tools:ignore="UnusedAttribute"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:background="@color/colorPrimary"/>
+
+            <Button
+                android:id="@+id/desDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="EmailAddress"
+                android:textColor="@color/colorWhite"
+                android:drawableStart="@drawable/ic_description"
+                android:drawableLeft="@drawable/ic_description"
+                android:background="@android:color/transparent"
+                android:textAllCaps="false"
+                android:textAlignment="textStart"
+                android:gravity="start|center"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/montserrat"
+                android:foreground="?attr/selectableItemBackground"
+                tools:ignore="UnusedAttribute"/>
+
+
+        </LinearLayout>
+
+
+</LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+
+
+
+
+<!--    <ScrollView-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:orientation="vertical"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        tools:ignore="MissingConstraints">-->
+
+<!--    </ScrollView>-->
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
