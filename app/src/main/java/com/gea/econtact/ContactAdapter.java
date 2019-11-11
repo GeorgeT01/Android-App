@@ -143,6 +143,11 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerViewHolder> imp
         data.remove(position);
         notifyItemRemoved(position);
     }
+
+    public void restoreItem(int position, ContactModel contactModel){
+        data.add((position + 1), contactModel);
+        notifyDataSetChanged();
+    }
     @Override
     public Filter getFilter() {
 

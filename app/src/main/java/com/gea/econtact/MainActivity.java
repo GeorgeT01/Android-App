@@ -13,12 +13,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.SearchView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -70,8 +72,25 @@ public class MainActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 // Continue with delete operation
                                 final ContactModel deleteItem = ((ContactAdapter)recyclerView.getAdapter()).getItem(viewHolder.getAdapterPosition());
+                                final int deleteIndex = viewHolder.getAdapterPosition();
                                 contactAdapter.removeItem(viewHolder.getAdapterPosition());
                                 new Database(context).deleteContact(deleteItem.getId());
+
+                                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),"Contact Deleted", Snackbar.LENGTH_LONG);
+                                snackbar.setAction("UNDO", new View.OnClickListener() {
+                                    @Override
+                                    public void onClick(View view) {
+                                        //contactAdapter.restoreItem(deleteItem, viewHolder.getAdapterPosition());
+                                        new Database(context).addContact(deleteItem);
+                                        contactAdapter.restoreItem(viewHolder.getAdapterPosition(), deleteItem);
+                                        contactAdapter.notifyDataSetChanged();
+                                        Log.d("LOG", Integer.toString(viewHolder.getAdapterPosition()));
+
+                                    }
+                                });
+                                snackbar.setActionTextColor(Color.YELLOW);
+                                snackbar.show();
+
                             }
                         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
@@ -79,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
                         contactAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
                     }
                 })
-                        .setIcon(R.drawable.ic_warning_yellow)
-                        .show();
+                .setIcon(R.drawable.ic_warning_yellow)
+                .show();
 
 
             }
