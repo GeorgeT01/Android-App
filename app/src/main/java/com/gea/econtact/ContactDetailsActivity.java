@@ -112,5 +112,4 @@ public class ContactDetailsActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }
