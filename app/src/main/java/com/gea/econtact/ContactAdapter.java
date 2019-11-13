@@ -145,7 +145,7 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerViewHolder> imp
     }
 
     public void restoreItem(int position, ContactModel contactModel){
-        data.add((position + 1), contactModel);
+        data.add((position), contactModel);
         notifyDataSetChanged();
     }
     @Override

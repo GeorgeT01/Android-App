@@ -64,27 +64,28 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onSwiped(@NonNull final RecyclerView.ViewHolder viewHolder, int direction) {
-
+                final ContactModel deleteItem = ((ContactAdapter)recyclerView.getAdapter()).getItem(viewHolder.getAdapterPosition());
+                final int deleteIndex = viewHolder.getAdapterPosition();
                 new AlertDialog.Builder(context, R.style.CustomAlertDialog)
                         .setTitle("Delete Contact")
                         .setMessage("Are you sure you want to delete this contact?")
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int which) {
                                 // Continue with delete operation
-                                final ContactModel deleteItem = ((ContactAdapter)recyclerView.getAdapter()).getItem(viewHolder.getAdapterPosition());
-                                final int deleteIndex = viewHolder.getAdapterPosition();
+
                                 contactAdapter.removeItem(viewHolder.getAdapterPosition());
                                 new Database(context).deleteContact(deleteItem.getId());
 
-                                Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),"Contact Deleted", Snackbar.LENGTH_LONG);
+                                final Snackbar snackbar = Snackbar.make(findViewById(android.R.id.content),"Contact Deleted", Snackbar.LENGTH_LONG);
                                 snackbar.setAction("UNDO", new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
                                         //contactAdapter.restoreItem(deleteItem, viewHolder.getAdapterPosition());
+                                        snackbar.dismiss();
                                         new Database(context).addContact(deleteItem);
-                                        contactAdapter.restoreItem(viewHolder.getAdapterPosition(), deleteItem);
+                                        contactAdapter.restoreItem(deleteIndex, deleteItem);
                                         contactAdapter.notifyDataSetChanged();
-                                        Log.d("LOG", Integer.toString(viewHolder.getAdapterPosition()));
+
 
                                     }
                                 });
@@ -95,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
                         }).setNegativeButton("No", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
-                        contactAdapter.notifyItemChanged(viewHolder.getAdapterPosition());
+                        contactAdapter.notifyItemChanged(deleteIndex);
                     }
                 })
                 .setIcon(R.drawable.ic_warning_yellow)
