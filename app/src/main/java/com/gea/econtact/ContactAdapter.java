@@ -106,9 +106,7 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerViewHolder> imp
                                         })
 
                                         // A null listener allows the button to dismiss the dialog and take no further action.
-                                        .setNegativeButton("No", null)
-                                        .setIcon(R.drawable.ic_warning_yellow)
-                                        .show();
+                                        .setNegativeButton("No", null).show();
 
                             }else if(which == 1){
                                 //second option clicked, do this...
