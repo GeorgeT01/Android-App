@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import java.net.URLEncoder;
+
 public class ContactDetailsActivity extends AppCompatActivity {
     private Database database;
     private Context context;
@@ -38,17 +40,13 @@ public class ContactDetailsActivity extends AppCompatActivity {
         contactGender = findViewById(R.id.genderDetails);
         contactDes = findViewById(R.id.desDetails);
         contactImage = findViewById(R.id.imgViewDetails);
-
         callBtn = findViewById(R.id.callBtn);
         mailBtn = findViewById(R.id.mailBtn);
         shareBtn = findViewById(R.id.shareBtn);
-
         context = this;
         database = new Database(context);
 
         getSingleContact();
-
-
     }
 
 
@@ -82,12 +80,13 @@ public class ContactDetailsActivity extends AppCompatActivity {
         mailBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent email = new Intent(Intent.ACTION_SEND);
-                email.putExtra(Intent.EXTRA_EMAIL, new String[]{data[2]});
-                email.putExtra(Intent.EXTRA_SUBJECT, "subject");
-                email.putExtra(Intent.EXTRA_TEXT, "message");
-                email.setType("message/rfc822");
-                startActivity(Intent.createChooser(email, "Email:"));
+                String uriText = "mailto:"+ data[2] +""+
+                        "?subject=" + URLEncoder.encode("Subject") +
+                        "&body=" + URLEncoder.encode("message");
+                Uri uri = Uri.parse(uriText);
+                Intent sendIntent = new Intent(Intent.ACTION_SENDTO);
+                sendIntent.setData(uri);
+                startActivity(Intent.createChooser(sendIntent, "Send Email"));
             }
         });
 

@@ -12,9 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -34,7 +32,7 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerViewHolder> imp
     private List<ContactModel> data;
     private List<ContactModel> dataFilterd;
 
-    // create constructor to innitilize context and data sent from MainActivity
+    // create constructor to initialise context and data sent from Activity
     public ContactAdapter(Context context, List<ContactModel> data){
         this.context=context;
         inflater= LayoutInflater.from(context);
@@ -55,7 +53,6 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerViewHolder> imp
     @Override
     public void onBindViewHolder(final RecyclerViewHolder holder, int position) {
         // Get current position of item in recycler view to bind data and assign values from list
-
         final ContactModel contactModel = data.get(position);
         holder.name.setText(contactModel.getName());
         // convert byte[] to image
@@ -104,12 +101,11 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerViewHolder> imp
 
                                             }
                                         })
-
                                         // A null listener allows the button to dismiss the dialog and take no further action.
                                         .setNegativeButton("No", null).show();
 
                             }else if(which == 1){
-                                //second option clicked, do this...
+                                //second option clicked, open edit activity
                                 Intent intent = new Intent(context, EditContactActivity.class);
                                 intent.putExtra("contact_id", contactModel.getId()); //Optional parameters
                                 context.startActivity(intent);
@@ -120,7 +116,7 @@ public class ContactAdapter extends RecyclerView.Adapter<RecyclerViewHolder> imp
                     optionDialog.show();
 
                 }else{
-
+                    // tap, show contact details
                     Intent intent = new Intent(view.getContext(), ContactDetailsActivity.class);
                     intent.putExtra("contact_id", contactModel.getId()); //Optional parameters
                     view.getContext().startActivity(intent);
@@ -184,7 +180,6 @@ class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClick
 
     private ItemClickListener itemClickListener;
     public TextView name;
-    public ImageView imageView;
     public CircleImageView circleImageView;
 
     public RecyclerViewHolder(@NonNull View itemView) {
@@ -202,7 +197,6 @@ class RecyclerViewHolder extends RecyclerView.ViewHolder implements View.OnClick
     public void onClick(View view) {
         itemClickListener.onClick(view, getAdapterPosition(),false);
     }
-
     @Override
     public boolean onLongClick(View view) {
         itemClickListener.onClick(view, getAdapterPosition(), true);
