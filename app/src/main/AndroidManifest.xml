@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".EditContactActivity" android:parentActivityName=".MainActivity"></activity>
+        <activity android:name=".EditContactActivity" android:parentActivityName=".ContactDetailsActivity" android:launchMode="singleTop"></activity>
         <activity
             android:name=".ContactDetailsActivity"
             android:parentActivityName=".MainActivity" />

@@ -183,10 +183,5 @@ public class EditContactActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public void onBackPressed() {
-        Intent intent= new Intent(EditContactActivity.this,MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
+
 }

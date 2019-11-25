@@ -23,13 +23,14 @@ public class ContactDetailsActivity extends AppCompatActivity {
     ImageButton callBtn, mailBtn, shareBtn;
     ImageView contactImage;
     String _contactId;
+    String contact_id;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contact_details);
 
         Intent intent = getIntent();
-        String contact_id = intent.getStringExtra("contact_id");
+        contact_id = intent.getStringExtra("contact_id");
         contactName = findViewById(R.id.nameDetails);
         contactEmail = findViewById(R.id.emailDetails);
         contactPhone = findViewById(R.id.phoneDetails);
@@ -44,6 +45,15 @@ public class ContactDetailsActivity extends AppCompatActivity {
 
         context = this;
         database = new Database(context);
+
+        getSingleContact();
+
+
+    }
+
+
+
+    void getSingleContact(){
         final String[] data = database.readSingle(contact_id); // get info
         byte[] imageByte = database.getContactImage(contact_id); //get Image
 
@@ -59,7 +69,6 @@ public class ContactDetailsActivity extends AppCompatActivity {
         contactDes.setText(data[6]);
 
         setTitle(data[1]);
-
         //call btn
         callBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +94,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
         shareBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
+                Intent shareIntent = new Intent(android.content.Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
                 String shareBody = data[1]+"\n"+data[2]+"\n"+data[3];
                 shareIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, data[1]);
@@ -93,9 +102,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
                 startActivity(Intent.createChooser(shareIntent, "Share"));
             }
         });
-
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.contact_details_menu, menu);
@@ -111,5 +118,11 @@ public class ContactDetailsActivity extends AppCompatActivity {
             context.startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onResume() {
+        getSingleContact();
+        super.onResume();
     }
 }
