@@ -50,6 +50,7 @@ public class AddContactActivity extends AppCompatActivity {
     private EditText nameEt, emailEt, phoneEt, desEt;
     RadioGroup genderRadioGroup;
     private RadioButton radioButton;
+    private boolean emptyDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +62,7 @@ public class AddContactActivity extends AppCompatActivity {
         database = new Database(context);
         //force-edittext-to-remove-focus
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
+        emptyDate = true;
 
         nameEt = findViewById(R.id.nameEditText);
         emailEt = findViewById(R.id.emailEditText);
@@ -93,6 +94,7 @@ public class AddContactActivity extends AppCompatActivity {
                                 if(day < 10){ _day = "0"+day; }
                                 else{ _day = Integer.toString(day); }
                                 datePickerBtn.setText(_day + "." + _month + "." + year);
+                                emptyDate =false;
                             }
                         }, year, month, dayOfMonth);
                 datePickerDialog.show(); // show dialog
@@ -190,12 +192,21 @@ public class AddContactActivity extends AppCompatActivity {
                 bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
                 byte[] imageInByte = stream.toByteArray();
 
+
+                //check if date is picked
+                String _birthDate;
+                if (emptyDate){
+                    _birthDate ="";
+                }else{
+                    _birthDate = datePickerBtn.getText().toString();
+                }
+
                 database.addContact(new ContactModel(
                         uniqueID,
                         nameEt.getText().toString(),
                         emailEt.getText().toString(),
                         phoneEt.getText().toString(),
-                        datePickerBtn.getText().toString(),
+                        _birthDate,
                         radioButton.getText().toString(),
                         desEt.getText().toString(),
                         imageInByte

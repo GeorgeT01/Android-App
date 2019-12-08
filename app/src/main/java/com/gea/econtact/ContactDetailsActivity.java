@@ -26,6 +26,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
     ImageView contactImage;
     String _contactId;
     String contact_id;
+    private Bitmap bmp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +56,7 @@ public class ContactDetailsActivity extends AppCompatActivity {
         final String[] data = database.readSingle(contact_id); // get info
         byte[] imageByte = database.getContactImage(contact_id); //get Image
 
-        Bitmap bmp = BitmapFactory.decodeByteArray(imageByte,0, imageByte.length);
+        bmp = BitmapFactory.decodeByteArray(imageByte,0, imageByte.length);
         contactImage.setImageBitmap(bmp);
 
         _contactId = data[0];

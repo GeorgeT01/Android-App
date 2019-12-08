@@ -80,7 +80,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@color/colorBlue"
+                android:background="@drawable/date_picker_btn"
                 android:fontFamily="@font/montserrat"
                 android:textColor="@color/colorWhite"
                 android:text="00.00.0000" />

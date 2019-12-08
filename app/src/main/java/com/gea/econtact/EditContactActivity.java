@@ -44,6 +44,7 @@ public class EditContactActivity extends AppCompatActivity {
     private RadioButton radioButtonEdit;
     private String _contactId;
     private  Bitmap bmp;
+    private boolean emptyDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,7 +56,7 @@ public class EditContactActivity extends AppCompatActivity {
         database = new Database(context);
         //force-edittext-to-remove-focus
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-
+        emptyDate =true;
 
 
 
@@ -89,6 +90,7 @@ public class EditContactActivity extends AppCompatActivity {
                                 if(day < 10){ _day = "0"+day; }
                                 else{ _day = Integer.toString(day); }
                                 datePickerBtnEdit.setText(_day + "." + _month + "." + year);
+                                emptyDate = false;
                             }
                         }, year, month, dayOfMonth);
                 datePickerDialog.show(); // show dialog
@@ -122,7 +124,14 @@ public class EditContactActivity extends AppCompatActivity {
         nameEdit.setText(data[1]);
         emailEdit.setText(data[2]);
         phoneEdit.setText(data[3]);
-        datePickerBtnEdit.setText(data[4]);
+        String _birthDate = data[4];
+        if (_birthDate.isEmpty()){
+            datePickerBtnEdit.setText("Choose Date");
+            emptyDate =true;
+        }else{
+            datePickerBtnEdit.setText(_birthDate);
+            emptyDate =false;
+        }
         //contactGender.setText(data[5]);
         desEdit.setText(data[6]);
     }
@@ -165,13 +174,19 @@ public class EditContactActivity extends AppCompatActivity {
                 ByteArrayOutputStream stream = new ByteArrayOutputStream();
                 bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
                 byte[] imageInByte = stream.toByteArray();
+                String _birthDate;
+                if (emptyDate){
+                    _birthDate ="";
+                }else{
+                    _birthDate = datePickerBtnEdit.getText().toString();
+                }
 
                 database.updateContact(new ContactModel(
                         _contactId,
                         nameEdit.getText().toString(),
                         emailEdit.getText().toString(),
                         phoneEdit.getText().toString(),
-                        datePickerBtnEdit.getText().toString(),
+                        _birthDate,
                         radioButtonEdit.getText().toString(),
                         desEdit.getText().toString(),
                         imageInByte
@@ -179,6 +194,9 @@ public class EditContactActivity extends AppCompatActivity {
                 Toast.makeText(context, "Contact saved", Toast.LENGTH_SHORT).show();
                 onBackPressed();
             }
+        }else if(id == android.R.id.home){
+           super.onBackPressed();
+           return true;
         }
         return super.onOptionsItemSelected(item);
     }
